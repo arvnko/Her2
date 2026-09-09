@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navi 🌝</title>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #fff5f8, #f3e8ff);
+    color: #292929;
+}
+.screen {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+}
+.screen.active {
+    display: flex;
+    animation: appear .55s ease;
+}
+.box {
+    width: 100%;
+    max-width: 460px;
+}
+.emoji {
+    font-size: 65px;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+h1 {
+    font-size: 31px;
+    margin-bottom: 15px;
+}
+h2 {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+p {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+    color: #666;
+}
+.small {
+    font-size: 13px;
+    color: #aaa;
+}
+button {
+    border: none;
+    border-radius: 50px;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 7px;
+    transition: transform .25s ease;
+}
+.yes {
+    background: #ff6f91;
+    color: white;
+    box-shadow: 0 8px 25px rgba(255,111,145,.3);
+}
+.yes:hover {
+    transform: scale(1.08);
+}
+.no {
+    background: white;
+    color: #777;
+    border: 1px solid #eee;
+}
+.card {
+    background: rgba(255,255,255,.75);
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.07);
+    margin-bottom: 20px;
+}
+.meme {
+    font-size: 21px;
+    font-weight: 700;
+    margin: 20px 0;
+}
+.big {
+    font-size: 42px;
+}
+.alien {
+    font-size: 70px;
+    margin: 15px;
+    animation: float 3s ease-in-out infinite;
+}
+.progress {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #aaa;
+}
+#yesButton {
+    transform-origin: center;
+}
+#noButton {
+    position: relative;
+}
+/* floating stuff */
+.float {
+    position: fixed;
+    bottom: -50px;
+    pointer-events: none;
+    opacity: .6;
+    animation: rise linear forwards;
+}
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+@keyframes bounce {
+    0%,100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-9px);
+    }
+}
+@keyframes float {
+    0%,100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+}
+@keyframes rise {
+    from {
+        transform: translateY(0) rotate(0deg);
+    }
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+    }
+}
+.shake {
+    animation: shake .4s;
+}
+@keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress">
+    Extremely important research • 0% serious
+</div>
+<!-- ================= SCREEN 1 ================= -->
+<section class="screen active" id="screen1">
+<div class="box">
+    <div class="emoji">🌝</div>
+    <h1>Hey Navi.</h1>
+    <p>
+        Yes, <b>you.</b>
+    </p>
+    <div class="card">
+        <p>
+            I have spent an unnecessarily large amount
+            of time making this completely unnecessary website.
+        </p>
+        <div class="meme">
+            Was it necessary?
+            <br>
+            Absolutely not.
+        </div>
+        <p class="small">
+            But we're already here...
+        </p>
+    </div>
+    <button class="yes" onclick="next(2)">
+        Continue my nonsense 😂
+    </button>
+</div>
+</section>
+<!-- ================= SCREEN 2 ================= -->
+<section class="screen" id="screen2">
+<div class="box">
+    <div class="emoji">🧐</div>
+    <h2>First of all...</h2>
+    <p>
+        I need to confirm something.
+    </p>
+    <div class="card">
+        <div class="big">👀</div>
+        <p>
+            Are you actually <b>Navi</b>?
+        </p>
+        <p class="small">
+            Please answer honestly.
+            This is a highly advanced scientific test.
+        </p>
+    </div>
+    <button class="yes" onclick="next(3)">
+        Obviously 🙄
+    </button>
+    <button class="no" onclick="nope(this)">
+        No
+    </button>
+</div>
+</section>
+<!-- ================= SCREEN 3 ================= -->
+<section class="screen" id="screen3">
+<div class="box">
+    <div class="emoji">🧠</div>
+    <h2>Excellent.</h2>
+    <p>
+        Our highly qualified scientists have confirmed...
+    </p>
+    <div class="card">
+        <div class="meme">
+            100% Navi detected.
+        </div>
+        <p>
+            Diagnosis:
+            <br>
+            <b>Too cute to be left unsupervised.</b>
+        </p>
+        <p class="small">
+            Don't worry, there is no cure.
+        </p>
+    </div>
+    <button class="yes" onclick="next(4)">
+        Continue 🌝
+    </button>
+</div>
+</section>
+<!-- ================= SCREEN 4 ================= -->
+<section class="screen" id="screen4">
+<div class="box">
+    <div class="alien">
+        👽 ❤️ 👽
+    </div>
+    <h2>Meanwhile...</h2>
+    <p>
+        Somewhere in another galaxy...
+    </p>
+    <div class="card">
+        <p>
+            Two aliens have been watching us.
+        </p>
+        <div class="meme">
+            Alien #1:
+            "Are they flirting?"
+            <br><br>
+            Alien #2:
+            "I don't know bro."
+            <br><br>
+            Alien #1:
+            "Let's keep watching."
+        </div>
+    </div>
+    <button class="yes" onclick="next(5)">
+        This is getting weird 😂
+    </button>
+</div>
+</section>
+<!-- ================= SCREEN 5 ================= -->
+<section class="screen" id="screen5">
+<div class="box">
+    <div class="emoji">🤨</div>
+    <h2>Okay serious question.</h2>
+    <p>
+        Don't overthink this.
+    </p>
+    <div class="card">
+        <p>
+            Do you think...
+        </p>
+        <div class="meme">
+            I'm slightly annoying?
+        </div>
+        <p class="small">
+            Be careful. Your answer may affect
+            the next 37 seconds of your life.
+        </p>
+    </div>
+    <div id="buttons5">
+        <button class="yes" id="yesButton" onclick="next(6)">
+            No, you're cute 😂
+        </button>
+        <button class="no" id="noButton" onclick="nope(this)">
+            YES 💀
+        </button>
+    </div>
+</div>
+</section>
+<!-- ================= SCREEN 6 ================= -->
+<section class="screen" id="screen6">
+<div class="box">
+    <div class="emoji">😌</div>
+    <h2>Interesting...</h2>
+    <div class="card">
+        <p>
+            You clicked <b>YES</b>.
+        </p>
+        <p>
+            I knew it.
+        </p>
+        <div class="meme">
+            Yet you are still here.
+        </div>
+        <p>
+            Which means...
+        </p>
+        <div class="big">
+            👀
+        </div>
+    </div>
+    <button class="yes" onclick="next(7)">
+        Continue 🌝
+    </button>
+</div>
+</section>
+<!-- ================= SCREEN 7 ================= -->
+<section class="screen" id="screen7">
+<div class="box">
+    <div class="emoji">🥸</div>
+    <h2>Final test.</h2>
+    <div class="card">
+        <p>
+            Would you admit...
+        </p>
+        <div class="meme">
+            that you are smiling right now?
+        </div>
+        <p class="small">
+            Lying is prohibited.
+            I have installed smile detection technology.
+        </p>
+    </div>
+    <button class="yes" id="yesButton2" onclick="next(8)">
+        Yes 😭
+    </button>
+    <button class="no" id="noButton2" onclick="nope(this)">
+        No 😐
+    </button>
+</div>
+</section>
+<!-- ================= SCREEN 8 ================= -->
+<section class="screen" id="screen8">
+<div class="box">
+    <div class="emoji">🚨</div>
+    <h2>HAHA.</h2>
+    <div class="card">
+        <div class="meme">
+            CAUGHT YOU.
+        </div>
+        <p>
+            I knew you were going to say yes.
+        </p>
+        <p>
+            And if you said no...
+        </p>
+        <p>
+            you're probably lying.
+            🌝
+        </p>
+    </div>
+    <button class="yes" onclick="next(9)">
+        Okay okay 😂
+    </button>
+</div>
+</section>
+<!-- ================= SCREEN 9 ================= -->
+<section class="screen" id="screen9">
+<div class="box">
+    <div class="alien">
+        👽 💕 👽
+    </div>
+    <h2>Okay, Navi...</h2>
+    <p>
+        The aliens have approved you.
+    </p>
+    <div class="card">
+        <p>
+            They said:
+        </p>
+        <div class="meme">
+            "She's cute."
+        </div>
+        <p>
+            I said:
+        </p>
+        <div class="meme">
+            "I KNOW."
+        </div>
+    </div>
+    <button class="yes" onclick="next(10)">
+        One last thing...
+    </button>
+</div>
+</section>
+<!-- ================= SCREEN 10 ================= -->
+<section class="screen" id="screen10">
+<div class="box">
+    <div class="emoji">🌝❤️</div>
+    <h1>Okay, I'm done.</h1>
+    <div class="card">
+        <p>
+            No dramatic speech.
+            No 17-page confession.
+            No emotional damage.
+        </p>
+        <p>
+            I just wanted to make you smile.
+        </p>
+        <div class="meme">
+            And judging by that smile...
+            <br>
+            mission accomplished.
+        </div>
+        <p>
+            So yeah...
+        </p>
+        <p>
+            <b>I know you're blushing.</b>
+        </p>
+        <p>
+            Don't even try to deny it. 🌝
+        </p>
+    </div>
+    <p class="small">
+        — From the idiot who made an entire website
+        instead of simply saying "hi" 😂
+    </p>
+</div>
+</section>
+<script>
+let currentScreen = 1;
+let noCount = 0;
+/* CHANGE SCREEN */
+function next(number) {
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+    document.getElementById("screen" + number)
+        .classList.add("active");
+    currentScreen = number;
+    document.getElementById("progress").innerText =
+        "Navi.exe • " + Math.min(number * 10, 100) + "% serious";
+}
+/* NO BUTTON CHAOS */
+function nope(button) {
+    noCount++;
+    /* Make YES bigger */
+    const yesButtons =
+        document.querySelectorAll(".yes");
+    yesButtons.forEach(btn => {
+        if (btn.offsetParent !== null) {
+            let scale = 1 + (noCount * 0.15);
+            if (scale > 2.2) {
+                scale = 2.2;
+            }
+            btn.style.transform =
+                "scale(" + scale + ")";
+        }
+    });
+    /* Move NO button */
+    button.style.position = "fixed";
+    const padding = 30;
+    const maxX =
+        window.innerWidth -
+        button.offsetWidth -
+        padding;
+    const maxY =
+        window.innerHeight -
+        button.offsetHeight -
+        padding;
+    const x =
+        Math.random() * maxX + padding / 2;
+    const y =
+        Math.random() * maxY + padding / 2;
+    button.style.left = x + "px";
+    button.style.top = y + "px";
+    /* Change text */
+    const messages = [
+        "Nice try 😂",
+        "Nope.",
+        "Too slow 🌝",
+        "Almost 😂",
+        "Bro...",
+        "Seriously?",
+        "STOP 😭",
+        "You can't escape the yes.",
+        "Why are you like this 😂",
+        "JUST SAY YES."
+    ];
+    button.innerText =
+        messages[Math.min(noCount - 1, messages.length - 1)];
+    /* Shake screen */
+    document.body.classList.remove("shake");
+    void document.body.offsetWidth;
+    document.body.classList.add("shake");
+    /* Eventually make NO tiny */
+    if (noCount >= 7) {
+        button.style.transform =
+            "scale(" + Math.max(0.35, 1 - noCount * .08) + ")";
+    }
+}
+/* FLOATING HEARTS / STARS */
+function createFloat() {
+    const element =
+        document.createElement("div");
+    element.className = "float";
+    const things = [
+        "❤️",
+        "💕",
+        "✨",
+        "🌝",
+        "⭐",
+        "💗",
+        "👽"
+    ];
+    element.innerText =
+        things[Math.floor(Math.random() * things.length)];
+    element.style.left =
+        Math.random() * 100 + "vw";
+    element.style.fontSize =
+        (12 + Math.random() * 20) + "px";
+    element.style.animationDuration =
+        (5 + Math.random() * 6) + "s";
+    document.body.appendChild(element);
+    setTimeout(() => {
+        element.remove();
+    }, 11000);
+}
+setInterval(createFloat, 650);
+/* RANDOM LITTLE CONSOLE MESSAGE
+   because why not */
+console.log(
+    "Navi 🌝 has entered the website."
+);
+console.log(
+    "Developer's note: yes, this was unnecessary."
+);
+</script>
+</body>
+</html>
